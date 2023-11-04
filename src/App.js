@@ -1,19 +1,29 @@
-import logo from './logo.svg';
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
+import logo from './logo.svg';
 import Navbar from './Navbar.js';
-import Cards from './Cards.js';
+import Home from './pages/Home.js';
+import Card from './pages/Card.js';
+import Contact from './pages/Contact.js';
+import NoPage from './pages/NoPage.js';
 
-function App() {
+export default function App() {
   return (
-  <div className="App">
-    <Navbar />
-    <h1>CS 230L</h1>
-    <h2>Section - 003</h2>
-    <p>WVU ID: 800323433</p>
-    <p>Hi I am Nate O'Brien</p>
-    <Cards />
-  </div>
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navbar />}>
+            <Route index element={<Home />}></Route>
+            <Route path="card" element={<Card />}></Route>
+            <Route path="contact" element={<Contact />}></Route>
+            <Route path="*" element={<NoPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 
-export default App;
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
